@@ -1,0 +1,14 @@
+{{- $args := .Params -}}
+{{- $style := "simple" -}}
+{{- $iconClass := "" -}}
+{{- if gt (len $args) 0 -}}
+  {{- range $args -}}
+    {{- if strings.HasPrefix . "fa" -}}
+      {{- $iconClass = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<div class="note {{ range $args }}{{ . }} {{ end }}">
+  {{- if $iconClass -}}<i class="note-icon {{ $iconClass }}"></i>{{- end -}}
+  {{- .Inner | markdownify -}}
+</div>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="{{ .Site.Params.colors.primary }}">
+    <meta name="msapplication-navbutton-color" content="{{ .Site.Params.colors.primary }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>{{ if .Title }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
+
+    {{ if .Site.Params.features.dark_mode }}
+    <script>
+        (function() {
+          var savedDarkMode = localStorage.getItem('darkMode') === 'true';
+          if (savedDarkMode) {
+            document.documentElement.classList.add('dark-mode');
+          }
+        })();
+    </script>
+    {{ end }}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    {{ with .OutputFormats.Get "RSS" }}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" title="{{ $.Site.Title }}">
+    {{ end }}
+
+    <link rel="icon" href="{{ .Site.Params.favicon | relURL }}">
+
+    <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/tags.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/categories.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/categories-accordion.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/highlight.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/toc.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/image-zoom.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/share.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/mobile-nav.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/search.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/scrollbar.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/timeline.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/animations.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/ai-theme.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/loading-animation.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/article-modal.css" | relURL }}">
+
+    {{ if eq .Type "about" }}
+    <link rel="stylesheet" href="{{ "css/about.css" | relURL }}">
+    {{ end }}
+
+    <style>
+      :root {
+        --primary-color: {{ .Site.Params.colors.primary }};
+        --secondary-color: {{ .Site.Params.colors.secondary }};
+        --accent-color: {{ .Site.Params.colors.accent }};
+        --background-color: {{ .Site.Params.colors.background }};
+        --text-color: {{ .Site.Params.colors.text }};
+        --overlay-color: {{ .Site.Params.colors.overlay }};
+        --tag-background-color: {{ .Site.Params.colors.tag_background }};
+        --card-background-color: {{ .Site.Params.colors.card_background }};
+      }
+    </style>
+
+    {{ range .Site.Params.inject.head }}
+    {{ . | safeHTML }}
+    {{ end }}
+
+</head>
+<body>
+    <div id="app">
+        {{ partial "header.html" . }}
+        {{ partial "search.html" . }}
+
+        <main class="main">
+            {{ block "main" . }}{{ end }}
+        </main>
+
+        {{ partial "footer.html" . }}
+    </div>
+
+    {{ if .Site.Params.features.dark_mode }}
+    <script>
+        (function() {
+          const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+          if (savedDarkMode) {
+            document.body.classList.add('dark-mode');
+          }
+
+          document.documentElement.style.visibility = 'hidden';
+          document.addEventListener('DOMContentLoaded', function() {
+            document.documentElement.style.visibility = 'visible';
+          });
+        })();
+    </script>
+    {{ end }}
+
+    <script src="{{ "js/main.js" | relURL }}"></script>
+    <script src="{{ "js/tags.js" | relURL }}"></script>
+    <script src="{{ "js/categories-accordion.js" | relURL }}"></script>
+    <script src="{{ "js/highlight.js" | relURL }}"></script>
+    <script src="{{ "js/load-more.js" | relURL }}"></script>
+    <script src="{{ "js/header-scroll.js" | relURL }}"></script>
+    <script src="{{ "js/toc.js" | relURL }}"></script>
+    <script src="{{ "js/image-zoom.js" | relURL }}"></script>
+    <script src="{{ "js/share.js" | relURL }}"></script>
+    <script src="{{ "js/search.js" | relURL }}"></script>
+    <script src="{{ "js/hide-inline-interaction.js" | relURL }}"></script>
+    <script src="{{ "js/hide-toggle-interaction.js" | relURL }}"></script>
+    <script src="{{ "js/dark-mode-sync.js" | relURL }}"></script>
+    <script src="{{ "js/animations.js" | relURL }}"></script>
+    <script src="{{ "js/ai-theme.js" | relURL }}"></script>
+    <script src="{{ "js/loading-animation.js" | relURL }}"></script>
+    <script src="{{ "js/article-modal.js" | relURL }}"></script>
+
+    <script>
+      window.theme = {
+        features: {{ .Site.Params.features | jsonify | safeJS }},
+        code_block: {{ .Site.Params.code_block | jsonify | safeJS }},
+        ai_summary: {{ .Site.Params.ai_summary | jsonify | safeJS }},
+        categories: {{ .Site.Params.categories | jsonify | safeJS }},
+        article_list: {{ .Site.Params.article_list | jsonify | safeJS }}
+      };
+    </script>
+
+    {{ range .Site.Params.inject.bottom }}
+    {{ . | safeHTML }}
+    {{ end }}
+</body>
+</html>

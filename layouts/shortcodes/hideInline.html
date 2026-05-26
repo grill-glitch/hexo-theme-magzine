@@ -1,0 +1,8 @@
+{{- $content := .Get 0 | default "" -}}
+{{- $displayText := .Get 1 | default "点击查看隐藏内容" -}}
+{{- $bgColor := .Get 2 | default "#FF7242" -}}
+{{- $textColor := .Get 3 | default "#fff" -}}
+<span class="hide-inline"
+      data-hidden-content="{{ $content }}"
+      data-display-text="{{ $displayText }}"
+      style="background-color: {{ $bgColor | safeCSS }}; color: {{ $textColor | safeCSS }};">{{ $displayText }}</span>

@@ -1,0 +1,41 @@
+{{- $navbarStyle := .Site.Params.navbar.style | default "fill" -}}
+<header class="header {{ if eq $navbarStyle "bubble" }}navbar-bubble{{ end }}">
+  <nav class="nav">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="{{ "/" | relURL }}">
+          <span class="nav-title">{{ .Site.Title }}</span>
+        </a>
+      </div>
+
+      <div class="nav-menu">
+        {{ range .Site.Menus.main }}
+          {{ if .HasChildren }}
+            <div class="nav-item has-submenu">
+              <span class="nav-link">{{ .Name }}</span>
+              <div class="submenu">
+                {{ range .Children }}
+                  <a class="submenu-item" href="{{ .URL | relURL }}">{{ .Name }}</a>
+                {{ end }}
+              </div>
+            </div>
+          {{ else }}
+            <a class="nav-item {{ if or ($.IsMenuCurrent "main" .) (and (eq .URL "/") ($.IsHome)) }}active{{ end }}" href="{{ .URL | relURL }}">{{ .Name }}</a>
+          {{ end }}
+        {{ end }}
+
+        {{ if .Site.Params.search.enabled }}
+          <div class="search-toggle">
+            <i class="fas fa-search"></i>
+          </div>
+        {{ end }}
+      </div>
+
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,5 @@
+{{- $title := .Get 0 | default "" -}}
+<div class="hide-toggle">
+  <div class="hide-toggle-title">{{ $title }}</div>
+  <div class="hide-toggle-content">{{ .Inner | markdownify }}</div>
+</div>

@@ -1,0 +1,60 @@
+{{- if .Site.Params.author_card.enable -}}
+<section class="author-card-section">
+  <div class="author-card-container">
+    <div class="author-card {{ if .Site.Params.author_card.background_image }}author-card--with-bg{{ end }} {{ if eq .Site.Params.author_card.width "large" }}author-card--large{{ end }} {{ if and (not .Site.Params.author_card.background_image) .Site.Params.author_card.background_animation .Site.Params.author_card.background_animation.enable }}author-card--animated{{ end }}"
+         {{ if .Site.Params.author_card.background_image }}style="background-image: url('{{ .Site.Params.author_card.background_image | relURL }}')"{{ end }}>
+
+      {{ if and (not .Site.Params.author_card.background_image) .Site.Params.author_card.background_animation .Site.Params.author_card.background_animation.enable }}
+        <div class="author-card-bg author-card-bg--{{ .Site.Params.author_card.background_animation.type | default "particles" }} {{ if .Site.Params.author_card.background_animation.interactive }}author-card-bg--interactive{{ end }} author-card-bg--{{ .Site.Params.author_card.background_animation.density | default "medium" }} {{ if eq .Site.Params.author_card.background_animation.color_scheme "auto" }}author-card-bg--auto{{ else }}author-card-bg--{{ .Site.Params.author_card.background_animation.color_scheme | default "light" }}{{ end }}"></div>
+      {{ end }}
+
+      {{ if .Site.Params.author_card.avatar }}
+        <div class="author-avatar">
+          <img src="{{ .Site.Params.author_card.avatar | relURL }}" alt="Author Avatar">
+        </div>
+      {{ end }}
+      <div class="author-info">
+        <h2 class="author-name">{{ .Site.Params.author_card.name | default "Author Name" }}</h2>
+        <p class="author-bio">{{ .Site.Params.author_card.bio | default "Author bio goes here..." }}</p>
+        <div class="author-social">
+          {{ with .Site.Params.social.github }}
+            <a class="social-link" href="{{ . }}" target="_blank" rel="noopener" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+          {{ end }}
+          {{ with .Site.Params.social.twitter }}
+            <a class="social-link" href="{{ . }}" target="_blank" rel="noopener" title="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+          {{ end }}
+          {{ with .Site.Params.social.instagram }}
+            <a class="social-link" href="{{ . }}" target="_blank" rel="noopener" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          {{ end }}
+          {{ with .Site.Params.social.linkedin }}
+            <a class="social-link" href="{{ . }}" target="_blank" rel="noopener" title="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          {{ end }}
+          {{ with .Site.Params.social.bilibili }}
+            <a class="social-link" href="{{ . }}" target="_blank" rel="noopener" title="Bilibili">
+              <i class="fab fa-bilibili"></i>
+            </a>
+          {{ end }}
+          {{ with .Site.Params.social.email }}
+            <a class="social-link" href="{{ . }}" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          {{ end }}
+        </div>
+        {{ if and .Site.Params.author_card.button_text .Site.Params.author_card.button_link }}
+          <div class="author-cta">
+            <a class="author-button" href="{{ .Site.Params.author_card.button_link | relURL }}">{{ .Site.Params.author_card.button_text }}</a>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+{{- end -}}

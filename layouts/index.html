@@ -1,0 +1,110 @@
+{{ define "main" }}
+
+{{ if and .Site.Params.hero .Site.Params.hero.enable }}
+<section class="hero-section">
+  <div class="hero-background">
+    {{ if .Site.Params.hero.background_image }}
+      <img src="{{ .Site.Params.hero.background_image | relURL }}" alt="Hero Background">
+    {{ end }}
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-typing">
+      <div id="typing-text"
+           data-text="{{ .Site.Params.hero.typing_text | default "Welcome to my blog" }}"
+           data-speed="{{ .Site.Params.hero.typing_speed | default 100 }}"
+           data-delete-speed="{{ .Site.Params.hero.delete_speed | default 50 }}"
+           data-pause="{{ .Site.Params.hero.pause_duration | default 2000 }}"
+           data-loop="{{ if ne .Site.Params.hero.typing_loop false }}true{{ else }}false{{ end }}"></div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-indicator">
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+        <div class="scroll-arrow">
+          <span>↓</span>
+        </div>
+      </div>
+      <div class="scroll-text">{{ .Site.Params.hero.scroll_hint | default "Scroll down to explore" }}</div>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ partial "author-card.html" . }}
+
+<section class="articles-section">
+  <div class="articles-container">
+    <div class="articles-header">
+      <div class="articles-filter">
+        {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+          <button class="filter-btn" data-filter="{{ $name }}">{{ $name }}</button>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="articles-grid {{ if eq .Site.Params.article_list.card_size "large" }}card-size-large{{ end }}">
+      {{ $sizes := slice "large" "medium" "small" "wide" "tall" }}
+      {{ range $index, $element := .Paginator.Pages }}
+        {{ $size := index $sizes (mod $index (len $sizes)) }}
+        <article class="article-card article-card--{{ $size }}">
+          {{ $cover := .Params.cover }}
+          {{ if not $cover }}
+            {{ if .Site.Params.post.use_default_cover }}
+              {{ $cover = .Site.Params.post.default_cover }}
+            {{ end }}
+          {{ end }}
+
+          {{ if $cover }}
+            <div class="article-image">
+              <a href="{{ .RelPermalink }}">
+                <img src="{{ $cover | relURL }}" alt="{{ .Title }}" loading="lazy">
+              </a>
+            </div>
+          {{ end }}
+
+          <div class="article-content">
+            <div class="article-meta">
+              {{ with .Params.categories }}
+                {{ range first 1 . }}
+                  <span class="article-category">
+                    <a href="{{ (URLize (printf "categories/%s" .)) | relURL }}">{{ . }}</a>
+                  </span>
+                {{ end }}
+              {{ end }}
+              <time class="article-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
+            </div>
+
+            <h3 class="article-title">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h3>
+
+            {{ if .Site.Params.article_list.show_excerpt }}
+              <div class="article-excerpt">
+                {{ .Summary }}
+                <a class="read-more" href="{{ .RelPermalink }}">{{ T "article.read_more" | default "Read more →" }}</a>
+              </div>
+            {{ end }}
+
+            <div class="article-tags">
+              {{ with .Params.tags }}
+                {{ range first 3 . }}
+                  <a class="tag" href="{{ (URLize (printf "tags/%s" .)) | relURL }}">{{ . }}</a>
+                {{ end }}
+              {{ end }}
+            </div>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+{{ if gt .Paginator.TotalPages 1 }}
+  <div class="load-more-container">
+    <button class="load-more-btn" data-current-page="{{ .Paginator.PageNumber }}" data-total-pages="{{ .Paginator.TotalPages }}">{{ T "common.load_more" | default "Load More Articles" }}</button>
+  </div>
+{{ end }}
+
+{{ end }}

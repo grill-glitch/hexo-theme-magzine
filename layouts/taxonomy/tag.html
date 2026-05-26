@@ -1,0 +1,63 @@
+{{ define "main" }}
+<div class="post-wrapper">
+  <article class="post-container">
+    <div class="post-header">
+      <h1 class="post-title">{{ .Title }}</h1>
+      <div class="post-subtitle">探索与 "{{ .Title }}" 相关的所有文章</div>
+    </div>
+
+    <div class="tags-content">
+      <div class="tag-posts">
+        <div class="tag-header">
+          <div class="tag-info">
+            <h2 class="tag-name">
+              <i class="fas fa-tag"></i> {{ .Title }}
+            </h2>
+            <div class="tag-description">共有 {{ len .Pages }} 篇文章</div>
+          </div>
+          <div class="tag-back">
+            <a href="/tags/">
+              <i class="fas fa-arrow-left"></i> 返回所有标签
+            </a>
+          </div>
+        </div>
+
+        <div class="post-list">
+          {{ range $index, $element := .Pages }}
+            {{ $cardSize := "small" }}
+            {{ if eq (mod $index 6) 0 }}{{ $cardSize = "large" }}{{ else if eq (mod $index 3) 0 }}{{ $cardSize = "medium" }}{{ end }}
+            <div class="post-item post-item--{{ $cardSize }}">
+              <div class="post-item-inner">
+                <div class="post-item-title">
+                  <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </div>
+                <div class="post-item-excerpt">
+                  <p>{{ .Summary }}</p>
+                </div>
+                <div class="post-item-meta">
+                  <div class="post-meta-left">
+                    <span class="post-date">
+                      <i class="far fa-calendar"></i> {{ .Date.Format "2006-01-02" }}
+                    </span>
+                    {{ with .Params.categories }}
+                      <span class="post-category">
+                        <i class="fas fa-folder"></i>
+                        {{ range first 1 . }}
+                          <a href="{{ (URLize (printf "categories/%s" .)) | relURL }}">{{ . }}</a>
+                        {{ end }}
+                      </span>
+                    {{ end }}
+                  </div>
+                  <div class="post-meta-right">
+                    <a class="read-more" href="{{ .RelPermalink }}">阅读全文 <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+{{ end }}

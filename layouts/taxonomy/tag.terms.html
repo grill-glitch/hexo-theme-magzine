@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="post-wrapper">
+  <article class="post-container">
+    <div class="post-header">
+      <h1 class="post-title">{{ .Title | default "Tags" }}</h1>
+      <div class="post-subtitle"></div>
+    </div>
+
+    <div class="tags-content">
+      <div class="tags-cloud">
+        {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+          {{ $size := "small" }}
+          {{ if gt (len $taxonomy.Pages) 10 }}{{ $size = "large" }}{{ else if gt (len $taxonomy.Pages) 5 }}{{ $size = "medium" }}{{ end }}
+          <a class="tag-cloud-item tag-cloud-item--{{ $size }}" href="{{ (URLize (printf "tags/%s" $name)) | relURL }}">
+            <span class="tag-name">{{ $name }}</span>
+            <span class="tag-count">{{ len $taxonomy.Pages }}</span>
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </article>
+</div>
+{{ end }}

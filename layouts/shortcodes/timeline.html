@@ -1,0 +1,7 @@
+{{- $title := .Get 0 | default "" -}}
+<div class="timeline">
+  {{- if $title -}}<h2 class="timeline-title">{{ $title }}</h2>{{- end -}}
+  <div class="timeline-body">
+    {{- .Inner | markdownify -}}
+  </div>
+</div>
