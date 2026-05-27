@@ -31,7 +31,7 @@
 1.  将主题作为子模块添加到您的 Hugo 项目：
 
 ``` bash
-git submodule add https://github.com/forever218/hugo-theme-magzine.git themes/magzine
+git submodule add https://github.com/grill-glitch/hexo-theme-magzine.git themes/magzine
 ```
 
 2.  在您的 `hugo.yaml` (或 `hugo.toml`) 文件中设置主题：

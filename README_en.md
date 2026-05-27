@@ -31,7 +31,7 @@
 1.  Add the theme as a submodule to your Hugo project:
 
 ``` bash
-git submodule add https://github.com/forever218/hugo-theme-magzine.git themes/magzine
+git submodule add https://github.com/grill-glitch/hexo-theme-magzine.git themes/magzine
 ```
 
 2.  Set the theme in your `hugo.yaml` (or `hugo.toml`) file:
