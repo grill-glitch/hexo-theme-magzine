@@ -3,6 +3,6 @@
 {{- $bgColor := .Get 2 | default "#FF7242" -}}
 {{- $textColor := .Get 3 | default "#fff" -}}
 <span class="hide-inline"
-      data-hidden-content="{{ $content }}"
-      data-display-text="{{ $displayText }}"
-      style="background-color: {{ $bgColor | safeCSS }}; color: {{ $textColor | safeCSS }};">{{ $displayText }}</span>
+      data-hidden-content="{{ $content | htmlEscape }}"
+      data-display-text="{{ $displayText | htmlEscape }}"
+      style="background-color: {{ $bgColor | safeCSS }}; color: {{ $textColor | safeCSS }};">{{ $displayText | htmlEscape }}</span>
