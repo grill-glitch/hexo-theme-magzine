@@ -1,0 +1,50 @@
+{{ define "main" }}
+<div class="post-wrapper">
+  <article class="post-container">
+    <div class="post-header">
+      <h1 class="post-title">{{ .Title }}</h1>
+      <div class="post-subtitle">分类下的所有文章</div>
+    </div>
+
+    <div class="category-content">
+      <div class="category-posts">
+        <div class="category-header">
+          <div class="category-info">
+            <h2 class="category-name">
+              <i class="fas fa-folder"></i> {{ .Title }}
+            </h2>
+            <div class="category-description">共有 {{ len .Pages }} 篇文章</div>
+          </div>
+          <div class="category-back">
+            <a href="/categories/">
+              <i class="fas fa-arrow-left"></i> 返回所有分类
+            </a>
+          </div>
+        </div>
+
+        <div class="post-list">
+          {{ range .Pages }}
+            <div class="post-item">
+              <div class="post-item-inner">
+                <div class="post-item-title">
+                  <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </div>
+                <div class="post-item-meta">
+                  <div class="post-meta-left">
+                    <span class="post-date">
+                      <i class="far fa-calendar"></i> {{ .Date.Format "2006-01-02" }}
+                    </span>
+                  </div>
+                  <div class="post-meta-right">
+                    <a class="read-more" href="{{ .RelPermalink }}">阅读全文 <i class="fas fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+{{ end }}

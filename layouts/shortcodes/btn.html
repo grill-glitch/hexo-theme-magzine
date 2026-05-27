@@ -1,0 +1,8 @@
+{{- $url := .Get 0 | default "" -}}
+{{- $text := .Get 1 | default "" -}}
+{{- $icon := .Get 2 | default "" -}}
+{{- $option := .Get 3 | default "" -}}
+<a class="btn-newspaper {{ $option }}" href="{{ $url | relURL }}" title="{{ $text }}">
+  {{- if $icon -}}<i class="{{ $icon }}"></i>{{- end -}}
+  {{- if $text -}}<span>{{ $text }}</span>{{- end -}}
+</a>

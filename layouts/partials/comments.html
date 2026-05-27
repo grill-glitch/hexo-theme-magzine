@@ -1,0 +1,67 @@
+{{ if .Site.Params.comments.enable }}
+  {{ if eq .Site.Params.comments.type "disqus" }}
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = '{{ .Permalink }}';
+        this.page.identifier = '{{ .File.Path }}';
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://{{ .Site.Params.comments.shortname }}.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+  {{ else if eq .Site.Params.comments.type "gitalk" }}
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+      var gitalk = new Gitalk({
+        clientID: '{{ .Site.Params.comments.client_id }}',
+        clientSecret: '{{ .Site.Params.comments.client_secret }}',
+        repo: '{{ .Site.Params.comments.repo }}',
+        owner: '{{ .Site.Params.comments.owner }}',
+        admin: ['{{ .Site.Params.comments.admin }}'],
+        id: '{{ .File.Path }}',
+        distractionFreeMode: false
+      });
+      gitalk.render('gitalk-container');
+    </script>
+  {{ else if eq .Site.Params.comments.type "valine" }}
+    <div id="valine-comments"></div>
+    <script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+    <script>
+      new Valine({
+        el: '#valine-comments',
+        appId: '{{ .Site.Params.comments.app_id }}',
+        appKey: '{{ .Site.Params.comments.app_key }}',
+        placeholder: '{{ .Site.Params.comments.placeholder | default "Leave your comments here..." }}',
+        avatar: '{{ .Site.Params.comments.avatar | default "mm" }}',
+        meta: ['nick', 'mail', 'link'],
+        pageSize: '{{ .Site.Params.comments.page_size | default 10 }}',
+        lang: '{{ .Site.Params.comments.lang | default "en" }}',
+        visitor: {{ .Site.Params.comments.visitor | default false }},
+        highlight: {{ .Site.Params.comments.highlight | default true }},
+        recordIP: {{ .Site.Params.comments.record_ip | default false }},
+        serverURLs: '{{ .Site.Params.comments.server_urls | default "" }}'
+      });
+    </script>
+  {{ else if eq .Site.Params.comments.type "twikoo" }}
+    <div id="twikoo"></div>
+    <script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script>
+    <script>
+      twikoo.init({
+        envId: '{{ .Site.Params.comments.twikoo.envId }}',
+        el: '#twikoo',
+        region: '{{ .Site.Params.comments.twikoo.region }}',
+        path: '{{ .Site.Params.comments.twikoo.path | default .RelPermalink }}',
+        visitor: {{ .Site.Params.comments.twikoo.visitor | default false }},
+        onCommentLoaded: function () {
+          console.log('Twikoo评论加载成功');
+        }
+      });
+    </script>
+  {{ end }}
+{{ end }}

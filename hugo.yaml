@@ -1,0 +1,201 @@
+baseURL: "https://example.com"
+languageCode: "zh-CN"
+title: "Magzine"
+theme: "magzine"
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  favicon: "/favicon.ico"
+  logo: "/images/0.gif"
+
+  # Hero Section
+  hero:
+    enable: false
+    background_image: "/images/11.webp"
+    typing_text: "天接云涛连晓雾，星河欲转千帆舞"
+    typing_speed: 100
+    delete_speed: 50
+    pause_duration: 2000
+    scroll_hint: "向下滚动探索更多"
+
+  # Article List
+  article_list:
+    card_size: "normal"  # normal or large
+    view_mode: "modal"  # redirect or modal
+
+  # Colors
+  colors:
+    primary: '#1a1a1a'
+    secondary: '#666666'
+    accent: '#ff6b6b'
+    background: '#ffffff'
+    text: '#333333'
+    overlay: 'rgba(0, 0, 0, 0.7)'
+    tag_background: '#ffffff'
+    card_background: '#ffffff'
+
+  # Typography
+  fonts:
+    primary: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+    secondary: 'Playfair Display, Georgia, serif'
+    monospace: 'Fira Code, Monaco, Consolas, monospace'
+
+  # Layout
+  layout:
+    max_width: "1400px"
+    sidebar_width: "300px"
+    content_padding: "2rem"
+
+  # Social Links
+  social:
+    github: "https://github.com/forever218"
+    email: "mailto:3316703158@qq.com"
+    bilibili: "https://space.bilibili.com/82657269"
+
+  # Header
+  navbar:
+    style: "bubble"  # fill or bubble
+
+  # Footer
+  footer:
+    copyright: "© 2025 李思然. All rights reserved."
+    custom_html: ""
+    image:
+      enable: true
+      src: "https://s21.ax1x.com/2024/08/23/pAFm0cq.png"
+      link: "https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"
+      alt: "Footer Image"
+    badges:
+      - link: "https://hexo.io/"
+        shields: "https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg"
+        message: "博客框架为Hugo"
+      - link: "http://creativecommons.org/licenses/by-nc-sa/4.0/"
+        shields: "https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg"
+        message: "本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"
+
+  # Features
+  features:
+    dark_mode: true
+    smooth_scroll: true
+    back_to_top: true
+    loading_animation: true
+
+  # Code Block Settings
+  code_block:
+    height_limit: 200
+    enable_folding: true
+    max_height: "300px"
+    show_lang: true
+
+  # Author Card
+  author_card:
+    enable: true
+    avatar: "/images/0.gif"
+    name: "然"
+    bio: "人生而自由，却无往不在枷锁之中"
+    button_text: "关于我"
+    button_link: "/about/"
+    background_image: "/images/13.jpg"
+    width: "large"
+    background_animation:
+      enable: false
+      type: "geometric"
+      color_scheme: "auto"
+      interactive: true
+      density: "high"
+
+  # Comments
+  comments:
+    enable: false
+    type: "twikoo"
+    twikoo:
+      envId: ""
+      region: ""
+      path: ""
+      visitor: true
+
+  # Share buttons
+  share:
+    enable: true
+    options:
+      twitter: true
+      facebook: true
+      linkedin: true
+      copy_link: true
+      wechat: true
+      qq: true
+      weibo: true
+
+  # Post settings
+  post:
+    excerpt_length: 200
+    read_more: "阅读更多"
+    use_default_cover: true
+    default_cover: "/images/19.png"
+
+  # Search
+  search:
+    enabled: true
+    provider: "local"
+
+  # AI Summary
+  ai_summary:
+    enable: true
+    api_key: ""
+    summary_directly: false
+    ai_name: "然-AI"
+    ai_introduce: "我是文章辅助AI: 然-AI，一个基于deepseek的强大语言模型，有什么可以帮到您？😊"
+    ai_version: "deepseekv3"
+    buttons:
+      - "介绍自己"
+      - "来点灵感"
+      - "生成AI简介"
+
+  # Categories Page
+  categories:
+    layout: "accordion"
+    accordion_animation: true
+    show_empty_categories: true
+
+  # Table of Contents
+  toc:
+    empty_toc_behavior: "placeholder"
+
+  # Custom code injection
+  inject:
+    head:
+      - '<link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css">'
+      - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">'
+    bottom:
+      - '<script src="/js/ai.js"></script>'
+      - '<script src="/js/postai.js"></script>'
+
+menu:
+  main:
+    - name: "首页"
+      url: "/"
+      weight: 1
+    - name: "关于"
+      url: "/about/"
+      weight: 2
+    - name: "归档"
+      url: "/archives/"
+      weight: 3
+    - name: "分类"
+      url: "/categories/"
+      weight: 4
+    - name: "标签"
+      url: "/tags/"
+      weight: 5
+    - name: "友链"
+      url: "/link/"
+      weight: 6
+    - name: "示例网站"
+      url: "https://example.com"
+      parent: "网站"
+      weight: 7

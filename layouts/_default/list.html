@@ -1,0 +1,41 @@
+{{ define "main" }}
+<div class="archive-container">
+  <div class="archive-header">
+    <h1 class="archive-title">{{ .Title }}</h1>
+  </div>
+
+  <div class="timeline">
+    {{ range .Pages.GroupByDate "2006" }}
+      <div class="archive-year">
+        <h2 class="year-title">{{ .Key }}</h2>
+        {{ range .Pages }}
+          <div class="archive-post">
+            <div class="archive-date">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02" }}</time>
+            </div>
+            <h3 class="archive-post-title">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h3>
+            <div class="archive-meta">
+              {{ with .Params.categories }}
+                <div class="archive-category">
+                  {{ range . }}
+                    <a href="{{ (URLize (printf "categories/%s" .)) | relURL }}">{{ . }}</a>
+                  {{ end }}
+                </div>
+              {{ end }}
+              {{ with .Params.tags }}
+                <div class="archive-tags">
+                  {{ range . }}
+                    <a class="tag" href="{{ (URLize (printf "tags/%s" .)) | relURL }}">{{ . }}</a>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

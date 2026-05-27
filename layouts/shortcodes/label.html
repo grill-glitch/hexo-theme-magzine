@@ -1,0 +1,5 @@
+{{- $text := .Get 0 | default "" -}}
+{{- $color := .Get 1 | default "default" -}}
+{{- $colorMap := dict "default" "var(--primary-color)" "primary" "var(--primary-color)" "success" "#52c41a" "info" "#1890ff" "warning" "#faad14" "danger" "#ff4d4f" "important" "#722ed1" -}}
+{{- $bgColor := index $colorMap $color | default $color -}}
+<span class="label" style="background-color: {{ $bgColor | safeCSS }}">{{ $text }}</span>
