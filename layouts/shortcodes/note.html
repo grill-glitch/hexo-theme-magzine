@@ -1,18 +1,14 @@
 {{- $args := .Params -}}
 {{- $style := "simple" -}}
 {{- $iconClass := "" -}}
-{{- $validArgs := slice -}}
 {{- if gt (len $args) 0 -}}
   {{- range $args -}}
     {{- if strings.HasPrefix . "fa" -}}
       {{- $iconClass = . -}}
     {{- end -}}
-    {{- if findRE "^[A-Za-z0-9_-]+$" . -}}
-      {{- $validArgs = $validArgs | append . -}}
-    {{- end -}}
   {{- end -}}
 {{- end -}}
-<div class="note {{ range $validArgs }}{{ . }} {{ end }}">
+<div class="note {{ range $args }}{{ . }} {{ end }}">
   {{- if $iconClass -}}<i class="note-icon {{ $iconClass }}"></i>{{- end -}}
   {{- .Inner | markdownify -}}
 </div>

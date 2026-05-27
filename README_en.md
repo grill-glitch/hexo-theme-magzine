@@ -1,255 +1,76 @@
-# Magzine Theme for Hexo
+<div align="center">
+  <h1>Magzine Theme</h1>
+</div>
 
-A modern magazine-style Hexo theme featuring a fullscreen hero section with typing effect and dynamic article layouts.
+![Preview](https://github.com/user-attachments/assets/7bf5964e-9dfe-41f6-a281-3568bd5807ef)
 
-![Preview](https://via.placeholder.com/1200x600/1a1a1a/ffffff?text=Magzine+Theme+Preview)
+<div align="center">
+  <p>
+    A modern magazine-style Hugo theme with fullscreen hero and dynamic layouts. Concise, elegant, and fast.
+  </p>
+</div>
+
+## Preview
+👉 My [Blog](https://2am.top)
+
+## Documentation
+👉 [Guide (Chinese)](https://2am.top/2026/01/28/magzine%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8C%97/)
 
 ## Features
 
-- **Fullscreen Hero Section**: Eye-catching landing page with typing animation
-- **Magazine-style Layout**: Dynamic article cards with varying sizes and positions
-- **Modern Design**: Clean, minimalist aesthetic with smooth animations
-- **Responsive**: Fully responsive design that works on all devices
-- **Customizable**: Extensive theme configuration options
-- **Performance Optimized**: Lazy loading, smooth scrolling, and optimized animations
+-   **Modern Design**: Minimalist aesthetics with smooth interaction.
+-   **Magazine Layout**: Dynamic article cards with various sizes and positions.
+-   **Responsive**: Adaptive for all devices, including ultra-wide screens.
+-   **Highly Customizable**: Extensive configuration for colors, fonts, and layouts.
+-   **Performance**: Smooth scrolling, optimized animations, and built-in search indexing.
+-   **AI Summary**: DeepSeek AI summary integration.
+-   **Shortcodes**: Ported tag plugins including notes, timelines, hidden content, labels, buttons, etc.
 
 ## Installation
 
-1. Clone or download this theme to your Hexo site's `themes` directory:
+1.  Add the theme as a submodule to your Hugo project:
 
-```bash
-git clone https://github.com/yourusername/hexo-theme-magzine.git themes/magzine
+``` bash
+git submodule add https://github.com/forever218/hugo-theme-magzine.git themes/magzine
 ```
 
-2. Modify your site's `_config.yml` to use the Magzine theme:
+2.  Set the theme in your `hugo.yaml` (or `hugo.toml`) file:
 
-```yaml
+``` yaml
 theme: magzine
 ```
 
-3. Install the required dependencies:
+3.  Copy the example `hugo.yaml` from the theme to your site's root directory for customization.
 
-```bash
-npm install
+## Configuration Example (hugo.yaml)
+
+``` yaml
+params:
+  colors:
+    accent: '#ff6b6b' # Theme color
+  hero:
+    enable: true
+    typing_text: "Sky connects cloud waves, stars turn sails dance"
+  author_card:
+    enable: true
+    name: "Author Name"
+    bio: "Short bio"
+  ai_summary:
+    enable: true
+    api_key: "your-api-key"
 ```
-
-## Configuration
-
-### Theme Configuration
-
-Edit `themes/magzine/_config.yml` to customize the theme:
-
-```yaml
-# Hero Section
-hero:
-  enable: true
-  background_image: /images/hero-bg.jpg
-  typing_text: Welcome to my blog
-  typing_speed: 100
-  delete_speed: 50
-  pause_duration: 2000
-  scroll_hint: Scroll down to explore
-
-# Article List
-article_list:
-  layout: magazine  # magazine or grid
-  items_per_page: 12
-  show_excerpt: true
-  excerpt_length: 120
-
-# Colors
-colors:
-  primary: '#1a1a1a'
-  secondary: '#666666'
-  accent: '#ff6b6b'
-  background: '#ffffff'
-  text: '#333333'
-  overlay: 'rgba(0, 0, 0, 0.7)'
-```
-
-### Site Configuration
-
-Configure your Hexo site's `_config.yml`:
-
-```yaml
-# Site
-title: Your Blog Title
-subtitle: Your Blog Subtitle
-description: Your blog description
-keywords: blog, technology, life
-author: Your Name
-language: en
-timezone: UTC
-
-# URL
-url: https://yourdomain.com
-root: /
-permalink: :year/:month/:day/:title/
-
-# Extensions
-theme: magzine
-```
-
-## Usage
-
-### Hero Background
-
-Add a fullscreen background image to your hero section:
-
-1. Create an `images` folder in your site's `source` directory
-2. Add your hero background image (e.g., `hero-bg.jpg`)
-3. Configure the path in `themes/magzine/_config.yml`:
-
-```yaml
-hero:
-  background_image: /images/hero-bg.jpg
-```
-
-### Article Covers
-
-Add cover images to your articles by including the `cover` variable in your front matter:
-
-```markdown
----
-title: My Awesome Article
-date: 2024-01-01
-cover: /images/article-cover.jpg
-categories: [Technology]
-tags: [web, development]
----
-
-Your article content here...
-```
-
-### Customizing Layout
-
-The theme supports different article card layouts:
-
-- **Large**: Spans 2x2 grid cells
-- **Wide**: Spans 2x1 grid cells  
-- **Tall**: Spans 1x2 grid cells
-- **Medium**: Standard 1x1 grid cell
-- **Small**: Compact 1x1 grid cell
-
-Cards are automatically assigned different sizes to create a magazine-style layout.
-
-## Customization
-
-### Colors
-
-Customize the color scheme by modifying the color variables in `_config.yml`:
-
-```yaml
-colors:
-  primary: '#1a1a1a'      # Main text color
-  secondary: '#666666'    # Secondary text color
-  accent: '#ff6b6b'       # Accent color for highlights
-  background: '#ffffff'   # Background color
-  text: '#333333'         # Body text color
-  overlay: 'rgba(0, 0, 0, 0.7)'  # Hero overlay color
-```
-
-### Typography
-
-The theme uses Google Fonts by default. You can customize the fonts in `_config.yml`:
-
-```yaml
-fonts:
-  primary: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-  secondary: 'Playfair Display, Georgia, serif'
-  monospace: 'Fira Code, Monaco, Consolas, monospace'
-```
-
-### Social Links
-
-Add your social media links in `_config.yml`:
-
-```yaml
-social:
-  github: https://github.com/yourusername
-  twitter: https://twitter.com/yourusername
-  instagram: https://instagram.com/yourusername
-  linkedin: https://linkedin.com/in/yourusername
-  email: your.email@example.com
-```
-
-## Development
-
-### Building the Theme
-
-```bash
-# Build your Hexo site
-hexo generate
-
-# Start the development server
-hexo server
-
-# Clean the generated files
-hexo clean
-```
-
-### Custom CSS
-
-To add custom CSS, create a `custom.css` file in your site's `source/css` directory:
-
-```css
-/* source/css/custom.css */
-.custom-style {
-  /* Your custom styles here */
-}
-```
-
-### Custom JavaScript
-
-To add custom JavaScript, create a `custom.js` file in your site's `source/js` directory:
-
-```javascript
-// source/js/custom.js
-console.log('Custom JavaScript loaded');
-```
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile, etc.)
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+1.  Fork the repository
+2.  Create a feature branch
+3.  Commit your changes
+4.  Submit a Pull Request
 
 ## License
-
-This theme is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Support
-
-If you encounter any issues or have questions, please:
-
-1. Check the [documentation](docs/)
-2. Search existing [issues](https://github.com/yourusername/hexo-theme-magzine/issues)
-3. Create a new issue if needed
+Licensed under the **MIT** license.
 
 ## Credits
 
-- [Hexo](https://hexo.io/) - The static site generator
-- [Pug](https://pugjs.org/) - Template engine
-- [Google Fonts](https://fonts.google.com/) - Typography
-- [Font Awesome](https://fontawesome.com/) - Icons (optional)
-
-## Changelog
-
-### v1.0.0
-- Initial release
-- Fullscreen hero section with typing effect
-- Magazine-style article layout
-- Responsive design
-- Customizable configuration options
-- Social media integration
-- SEO optimized
+-   [Hugo](https://gohugo.io/)
+-   [Font Awesome](https://fontawesome.com/)

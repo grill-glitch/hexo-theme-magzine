@@ -20,6 +20,7 @@
     <script>
       var gitalk = new Gitalk({
         clientID: '{{ .Site.Params.comments.client_id }}',
+        clientSecret: '{{ .Site.Params.comments.client_secret }}',
         repo: '{{ .Site.Params.comments.repo }}',
         owner: '{{ .Site.Params.comments.owner }}',
         admin: ['{{ .Site.Params.comments.admin }}'],
