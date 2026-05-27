@@ -5,7 +5,11 @@
 {{- if gt (len $args) 0 -}}
   {{- range $args -}}
     {{- if strings.HasPrefix . "fa" -}}
-      {{- $iconClass = . -}}
+      {{- if findRE "^fa[-:\\w\\s]+$" . -}}
+        {{- $iconClass = . -}}
+      {{- else -}}
+        {{- $iconClass = "fa fa-info-circle" -}}
+      {{- end -}}
     {{- end -}}
     {{- if findRE "^[A-Za-z0-9\\-_]+$" . -}}
       {{- $safeArgs = $safeArgs | append . -}}
